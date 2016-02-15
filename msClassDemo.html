@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+	 ul,li{
+	 	margin: 0;
+	 	padding:0;
+	 }
+       #container{
+         margin: 10px auto; 
+       	   padding: 5px;
+           width: 515px;
+       	  height: 400px;
+       	  border: 1px solid #ccc;
+       	 
+       }
+
+       #left{
+       	 position: relative;
+       	 margin-right: 5px;
+       	 float: left;
+       	 width: 400px;
+       	 height: 400px;
+       	 overflow: hidden;
+       }
+
+       #right{
+       	float: right;
+       	width: 100px;
+       	height: 400px;
+       }
+       #show ,#list {
+       	 list-style: none;
+       }
+       #show{
+       	 position: absolute;
+       }
+       #show li{
+       	 float: left;
+       	 width: 400px;
+       	 height: 400px;
+       }
+
+       #list li{
+       	 height: 100px;
+       	 width: 100px;
+       }
+        img{
+       	  width: 100%;
+       	  height: 100%;
+       	 
+       }
+
+       .mask{
+          position: relative;
+          width: 100px;
+          height: 100px;
+       }
+
+       .active{
+       	 position:absolute;
+     	 top:0;
+     	 left:0;
+     	 width:100%;
+     	 height:100%;
+     	 background:#000;
+     	 filter:alpha(opacity=50);
+     	 opacity:0.5;
+     	 z-index:100;
+     	 cursor: pointer;
+       }
+      
+	</style>
+</head>
+<body>
+	 <div id="container">
+	   <div id="left">
+	   	  	 <ul id="show">
+		 	 	<li><a href="#"><img src="img/0.jpg"></a></li>
+		 	 	<li><a href="#"><img src="img/1.jpg"></a></li>
+		 	 	<li><a href="#"><img src="img/2.jpg"></a></li>
+		 	 	<li><a href="#"><img src="img/3.jpg"></a></li>
+		 	 </ul>
+	   </div>
+	   <div id="right">
+	   	  <ul id="list">
+	   	  	<li><div class="mask"><img src="img/0.jpg"></div></li>	 	 	
+	   	  	<li><div class="mask"><img src="img/1.jpg"></div></li>
+	 	 	<li><div class="mask"><img src="img/2.jpg"></div></li>
+	 	 	<li><div class="mask"><img src="img/3.jpg"></div></li>
+	   	  </ul>
+	   </div>
+	 </div>
+	 
+	 <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	 <script type="text/javascript" src="js/bannerslide.js"></script>
+	 <script type="text/javascript">
+         $(function(){
+             $('#contain').bannerlist({
+		         show : '#show',
+		         list : '#list'
+		      });
+         });
+	 </script>
+	 <script type="text/javascript">
+	   /*原生js实现*/
+      /* window.onload = function () {
+       	  var timer = null;
+       	  var oShow = document.getElementById('show');
+       	  var showLi = oShow.getElementsByTagName('li');
+          var ulWidth;
+
+       	  var listLi =  document.getElementById('list').getElementsByTagName('li');
+        
+       	  ulWidth = showLi[0].offsetWidth * showLi.length;
+
+       	  oShow.style.width = ulWidth + 'px';
+
+       	  for(var i = 0;i<listLi.length;i++){
+       	  	showLi[i].index = i;
+       	  	listLi[i].index = i;
+           var copy = showLi[i].cloneNode(true);
+           oShow.appendChild(copy);
+            oShow.style.width =  showLi[0].offsetWidth * showLi.length + 'px';
+            debugger;
+            
+            listLi[i].onmouseenter = function(){
+               oShow.style.left = -this.index * showLi[0].offsetWidth + 'px';
+               clearInterval(timer);
+            }
+
+            listLi[i].onmouseleave = function(){
+            	if(timer){
+            		clearInterval(timer);
+            	}
+            		 timer = setInterval(function(){
+		               if(-oShow.offsetLeft == ulWidth ){
+		              	    showLi[0].style.position = 'relative';
+
+		              	 	oShow.style.left = showLi[0].offsetWidth+'px';
+		              	 }else{
+		              	 	 oShow.style.left = oShow.offsetLeft - showLi[0].offsetWidth + 'px';
+		              	 	  showLi[0].style.position = 'static';
+		              	 }
+		          },1000); 
+            	
+            
+            }
+          }
+          
+          i = 0;
+          timer = setInterval(function(){
+              if(i==3){
+              	             showLi[0].style.position = 'relative';
+		              	 	 showLi[0].style.left = ulWidth+'px';
+		              	 	i=0;
+              	 }else{
+              	 	i++;
+              	 	
+              	 }
+              	 if(i == 0){
+	                 oShow.style.left = '0px';
+	                  showLi[0].style.position = 'static';
+              	 }
+              	  oShow.style.left = oShow.offsetLeft - showLi[0].offsetWidth + 'px';
+          },1000); 
+     }*/
+     </script>
+
+     <script type="text/javascript">
+        /*   $(function(){
+          	var $oLi =  $('#show li');
+          	var oneWidth =$oLi .outerWidth(true),
+          	   ulWidth = $oLi.length*oneWidth,
+          	   $listLi = $('#list li');
+            
+              $('#show').width(ulWidth);
+              //添加索引 
+              for(var i = 0;i<$oLi.length;i++){
+                  $oLi[i].index = i;
+                  $listLi[i].index = i;
+               }
+
+              var timer = null,i = 0,inow = 0;
+
+              timer = setInterval(function(){
+                 if(i == $oLi.length -1 ){
+                     $($oLi[0]).css({
+                         'position':'relative',
+                         'left': ulWidth+'px'
+                     });
+                     i = 0;
+                 }else{
+                 	i++;     	
+                 }
+              inow++;
+               $('#show').animate({
+                    'left': -oneWidth*inow+'px'
+                 },500,function(){
+                    if (i==0) {
+                    	debugger;
+                    	$(this).css({
+                    		 'left': '0px'
+                    	});
+                    	$($oLi[0]).css({
+                         'position':'static',
+                        });
+                    	inow = 0;
+                    }
+                 });
+
+              },1500);  
+
+          ****************
+
+             $listLi.hover(function(){
+                 clearInterval(timer);
+                 var _this = this;
+
+                  $('#show').animate({
+                    'left': -oneWidth*_this.index+'px'
+                 },50);
+
+              },function(){
+              	var _this = this;
+                 i = this.index;
+                 inow=_this.index;
+
+                 if (timer) { clearInterval(timer);};
+
+                  timer = setInterval(function(){
+	                 if(i == $oLi.length -1 ){
+	                     $($oLi[0]).css({
+	                         'position':'relative',
+	                         'left': ulWidth+'px'
+	                     });
+	                     i = 0;
+
+	                 }else{
+	                 	i++;     	
+	                 }
+	             	 inow++; 
+	               	$('#show').animate({
+	                    'left': -oneWidth*inow+'px'
+	                	 },500,function(){
+	                    if (i==0) {
+	                    	$(this).css({
+	                    		 'left': '0px'
+	                    	});
+	                    	$($oLi[0]).css({
+	                         'position':'static',
+	                        });
+	                    	inow = 0;
+	                    }
+	                });
+
+             	 },1500);
+
+              });
+
+ 
+          });
+*/
+     </script>
+</body>
+</html>
