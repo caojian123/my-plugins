@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	    html,body{
+	    	width: 100%;
+	    	height: 100%;
+	    	overflow: hidden;
+	    }
+       html,body,ul,li{
+       	 margin: 0;
+       	 padding: 0;
+       }
+       #container{
+         position: relative;
+       	 list-style: none;
+       	 width: 400%;
+       	 height: 100%;
+       	 font-size: 0;
+       }
+       .item{
+       	 width: 25%;
+       	 height: 100%;
+       	 display: inline-block;
+       }
+       #i1{
+       	background-color: yellow;
+       }
+       #i2{
+       	background-color: blue;
+       }
+       #i3{
+       	background-color: orange;
+       }
+       #i4{
+       	 background-color: red;
+       }
+       .active{
+       	 background-color: #000 !important;
+       }
+       #pagination{
+       	 position: fixed;
+       	 list-style: none;
+       	 bottom: 50px;
+               left: 45%;
+       	 margin-left: auto;
+       	 margin-right: auto; 
+       }
+       #pagination>li{
+       	  display: inline-block;
+       	  width: 20px;
+       	  height: 20px;
+       	  border-radius: 20px;
+       	  -moz-border-radius: 20px;
+       	  background: blue;
+		  margin-left: 10px;
+       }
+	</style>
+</head>
+<body>
+       <ul id="container">
+           <li class="item" id="i1">
+               <div class="itemfull">
+               </div>
+           </li>
+           <li class="item" id="i2">
+               <div class="itemfull">
+               </div>
+           </li>
+           <li class="item" id="i3">
+               <div class="itemfull">
+               </div>
+           </li>
+           <li class="item" id="i4">
+               <div class="itemfull">
+               </div>
+           </li>
+       </ul>
+
+	 <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	<script type="text/javascript" src="js/fullScal.js"></script>
+	<script type="text/javascript">
+              $('#container').fullSwitch({
+              	afterCallback:function(){
+              		 console.log('afterCallback');
+              	}
+              });
+	</script>
+</body>
+</html>
